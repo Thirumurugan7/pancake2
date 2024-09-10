@@ -145,7 +145,7 @@ const reff1 = setTimeout(() => {
 setLockpriceActual(totslval)
 
         const closeTimestamp = rounds["closeTimestamp"];
-        const lockTimestamp = rounds["closeTimestamp"];
+        const lockTimestamp = rounds["lockTimestamp"];
 
         setCloseTimestamp(closeTimestamp)
 setLockTimestamp(lockTimestamp)
