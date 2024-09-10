@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderLogo from "./assets/pancakelogo.png";
 import Home from "./components/Home";
 import BetBull from "./components/BetBull";
@@ -63,6 +63,10 @@ const App = () => {
       },
     },
   })
+
+//   useEffect(()=>{
+// console.log("account",account)
+//   },[])
   return (
     <WagmiProvider config={config}>
   <QueryClientProvider client={queryClient} >

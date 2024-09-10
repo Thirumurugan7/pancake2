@@ -6,6 +6,7 @@ import BN from 'bignumber.js'
 import usePollOraclePrice from "../hooks/usePollOraclePrice";
 // import { Progress, ProgressProps } from '@pancakeswap/uikit'
 import RoundProgress from "./RoundProgress";
+import { useAccount } from 'wagmi'
 
 const BetPosition = {
   BULL : 'Bull',
@@ -31,6 +32,8 @@ const LiveUp = ({ handleFlip }) => {
 
   const [realprice, setRealprice] = useState("")
   const { data, refetch, isFetching, error } = usePriceData();
+
+  const account  = useAccount()
 
   const config ={
     "address": "0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA",
@@ -122,6 +125,10 @@ const reff1 = setTimeout(() => {
 
 async function initialize() {
   try {
+
+    if(!account.isConnected){
+      return;
+    }
     const { provider, signer, contract } =
       await initializeContract();
     setProvider(provider);
@@ -241,107 +248,114 @@ setDownVal(formattedBearMultiplier)
   const bg2 = formatPrice(priceDifference) >0 ? "bg-[#353547] text-white":   "bg-[#31D0AA] text-white " 
 
   return (
-    <div>
-      <div className="flex justify-center items-center pt-10 text-white">
-        <div className="bg-[#27262C] shadow-xl h-full rounded-3xl md:mx-0 w-[240px]">
-          <div className="bg-tranparent text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-4xl  border-[#A881FC]">
+    <>
+{
+  account.isConnected ? (      <div className="flex justify-center items-center pt-10 text-white">
+    <div className="bg-[#27262C] shadow-xl h-full rounded-3xl md:mx-0 w-[240px]">
+      <div className="bg-tranparent text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-4xl  border-[#A881FC]">
 
-         
-            <div className="flex items-center text-[#A881FC] text-base gap-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="size-5"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <p>LIVE</p>
-            </div>
-            <div className="text-sm text-[#A881FC]"># {Number(actualEpoch) -1}</div>
+     
+        <div className="flex items-center text-[#A881FC] text-base gap-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="size-5"
+          >
+            <path
+              fillRule="evenodd"
+              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113Z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <p>LIVE</p>
+        </div>
+        <div className="text-sm text-[#A881FC]"># {Number(actualEpoch) -1}</div>
+      </div>
+       <RoundProgress
+    variant="flat"
+    scale="sm"
+    lockTimestamp={lockTimestamp ?? 0}
+    closeTimestamp={closeTimestamp ?? 0}
+  />
+      <div className="p-4">
+        <div className={`font-bold text-center p-1 ${bg1} w-[140px] rounded-t-xl mx-auto`}>
+          <p className="text-base font-extrabold">UP</p>
+          <p className="text-sm">
+            {upval}x <span className=" font-medium"> payout</span>
+          </p>
+        </div>
+        <div className="w-full mx-auto border-2 border-[#31D0AA] p-4 rounded-xl">
+          <div className="flex justify-between font-bold">
+            <p className=" text-[#B0A5C9] text-sm">LAST PRICE</p>
           </div>
-           <RoundProgress
-        variant="flat"
-        scale="sm"
-        lockTimestamp={lockTimestamp ?? 0}
-        closeTimestamp={closeTimestamp ?? 0}
-      />
-          <div className="p-4">
-            <div className={`font-bold text-center p-1 ${bg1} w-[140px] rounded-t-xl mx-auto`}>
-              <p className="text-base font-extrabold">UP</p>
-              <p className="text-sm">
-                {upval}x <span className=" font-medium"> payout</span>
-              </p>
-            </div>
-            <div className="w-full mx-auto border-2 border-[#31D0AA] p-4 rounded-xl">
-              <div className="flex justify-between font-bold">
-                <p className=" text-[#B0A5C9] text-sm">LAST PRICE</p>
-              </div>
 
-              <div className="flex justify-between items-center">
-                <p className=" font-bold text-[#31D0AA] text-base px-1">${formatPrice(price)}</p>
+          <div className="flex justify-between items-center">
+            <p className=" font-bold text-[#31D0AA] text-base px-1">${formatPrice(price)}</p>
 
-                {/* <p className=" font-bold text-[#31D0AA] text-base">${formatPrice(realprice)}</p> */}
-             {
-              formatPrice(priceDifference) >= 0 ?   <div className=" flex items-center bg-[#31D0AA] p-1 px-2 rounded-lg font-semibold text-xs">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="size-5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22V21a.75.75 0 0 1-1.5 0V4.81l-6.22 6.22a.75.75 0 1 1-1.06-1.06l7.5-7.5Z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-       ${formatPrice(priceDifference)}
-            </div> : <div className=" flex items-center bg-[#ED4B9E] p-1 px-2 rounded-lg font-semibold text-xs">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="size-5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22V21a.75.75 0 0 1-1.5 0V4.81l-6.22 6.22a.75.75 0 1 1-1.06-1.06l7.5-7.5Z"
-                  clip-rule="evenodd"
+            {/* <p className=" font-bold text-[#31D0AA] text-base">${formatPrice(realprice)}</p> */}
+         {
+          formatPrice(priceDifference) >= 0 ?   <div className=" flex items-center bg-[#31D0AA] p-1 px-2 rounded-lg font-semibold text-xs">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22V21a.75.75 0 0 1-1.5 0V4.81l-6.22 6.22a.75.75 0 1 1-1.06-1.06l7.5-7.5Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+   ${formatPrice(priceDifference)}
+        </div> : <div className=" flex items-center bg-[#ED4B9E] p-1 px-2 rounded-lg font-semibold text-xs">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22V21a.75.75 0 0 1-1.5 0V4.81l-6.22 6.22a.75.75 0 1 1-1.06-1.06l7.5-7.5Z"
+              clip-rule="evenodd"
 
-                   transform="rotate(180 12 12)"
-                />
-              </svg>
-       ${formatPrice(priceDifference)}
+               transform="rotate(180 12 12)"
+            />
+          </svg>
+   ${formatPrice(priceDifference)}
+        </div>
+         }
+      
+          </div>
+          <div className="pt-2">
+            <div className=" flex justify-between items-center text-xs">
+                <p>Locked Price: </p>
+                <p>${lockPrice}</p>
             </div>
-             }
-          
-              </div>
-              <div className="pt-2">
-                <div className=" flex justify-between items-center text-xs">
-                    <p>Locked Price: </p>
-                    <p>${lockPrice}</p>
-                </div>
-                <div className=" flex justify-between items-center font-bold text-sm">
-                    <p>Price Pool: </p>
-                    <p>{pricepool} BNB</p>
-                </div>
-              </div>
-            </div>
-            <div className={`font-bold text-center p-1 ${bg2} w-[140px] rounded-b-xl mx-auto`}>
-              <p className=" text-sm">
-           {downVal}x <span className=" font-medium"> payout</span>
-              </p>
-              <p className=" text-base">DOWN</p>
+            <div className=" flex justify-between items-center font-bold text-sm">
+                <p>Price Pool: </p>
+                <p>{pricepool} BNB</p>
             </div>
           </div>
         </div>
+        <div className={`font-bold text-center p-1 ${bg2} w-[140px] rounded-b-xl mx-auto`}>
+          <p className=" text-sm">
+       {downVal}x <span className=" font-medium"> payout</span>
+          </p>
+          <p className=" text-base">DOWN</p>
+        </div>
       </div>
     </div>
+  </div>) :  (
+    <div className="absolute inset-5 bg-white bg-opacity-0 backdrop-blur-md rounded-lg flex items-center justify-center mt-[150px]">
+    {/* Optional: You can put some content here for when the glass morphism is shown */}
+    {/* <p className="text-white">Content hidden behind glass morphism effect</p> */}
+  </div>
+  )
+}
+    </>
   );
 };
 
