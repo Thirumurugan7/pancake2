@@ -20,11 +20,12 @@ function serializeBigInt(data) {
   return data;
 }
 
-const BSC_MAINNET_RPC_URL = import.meta.env.RPC_URL;
+const BSC_MAINNET_RPC_URL = import.meta.env.VITE_RPC_URL;
 
 export async function initializeContract() {
   try {
     // Initialize provider using BSC Mainnet RPC
+
     const provider = new ethers.providers.JsonRpcProvider(BSC_MAINNET_RPC_URL);
 
     // Replace with your actual private key
