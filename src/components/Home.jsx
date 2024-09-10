@@ -48,9 +48,6 @@ async function initialize() {
 
   try {
 
-if(!account.isConnected){
-return;
-}
     const { provider, signer, contract } =
       await initializeContract();
     setProvider(provider);
@@ -94,7 +91,7 @@ setDownVal(formattedBearMultiplier)
 
 const reff1 = setTimeout(() => {
   initialize()
-},  1000)
+},  10000)
 
 
 
@@ -107,8 +104,7 @@ const reff1 = setTimeout(() => {
 
   return (
     <>
-{
-  account.isConnected ? (
+
     <div className="flex justify-center items-center pt-10 text-white">
     <div className="bg-[#27262C] shadow-xl h-full rounded-3xl md:mx-0 w-[240px]">
       <div className="bg-[#A881FC] text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-3xl">
@@ -171,13 +167,7 @@ const reff1 = setTimeout(() => {
       </div>
     </div>
   </div>
-  ) : (
-    <div className="absolute inset-0 bg-white bg-opacity-10 backdrop-blur-md rounded-lg flex items-center justify-center  mt-[100px]">
-    {/* Optional: You can put some content here for when the glass morphism is shown */}
-    <p className="text-white">Connect Wallet to use Pancake Swap Predictions</p>
-  </div>
-  )
-}
+  
     </>
   );
 };

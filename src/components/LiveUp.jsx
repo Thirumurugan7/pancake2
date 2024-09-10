@@ -126,9 +126,7 @@ const reff1 = setTimeout(() => {
 async function initialize() {
   try {
 
-    if(!account.isConnected){
-      return;
-    }
+   
     const { provider, signer, contract } =
       await initializeContract();
     setProvider(provider);
@@ -249,8 +247,7 @@ setDownVal(formattedBearMultiplier)
 
   return (
     <>
-{
-  account.isConnected ? (      <div className="flex justify-center items-center pt-10 text-white">
+   <div className="flex justify-center items-center pt-10 text-white">
     <div className="bg-[#27262C] shadow-xl h-full rounded-3xl md:mx-0 w-[240px]">
       <div className="bg-tranparent text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-4xl  border-[#A881FC]">
 
@@ -348,13 +345,7 @@ setDownVal(formattedBearMultiplier)
         </div>
       </div>
     </div>
-  </div>) :  (
-    <div className="absolute inset-5 bg-white bg-opacity-0 backdrop-blur-md rounded-lg flex items-center justify-center mt-[150px]">
-    {/* Optional: You can put some content here for when the glass morphism is shown */}
-    {/* <p className="text-white">Content hidden behind glass morphism effect</p> */}
   </div>
-  )
-}
     </>
   );
 };
