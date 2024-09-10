@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HeaderLogo from "./assets/pan.png";
+import HeaderLogo from "./assets/pancakelogo.png";
 import Home from "./components/Home";
 import BetBull from "./components/BetBull";
 import BetBeer from "./components/BetBear";
@@ -74,7 +74,7 @@ const App = () => {
         <div className="flex justify-center">
           <div className=" space-y-3">
             <img
-              className="h-14 w-40 mx-auto rounded-full"
+              className="h-14 w-50 mx-auto rounded-full"
               src={HeaderLogo}
               alt="Header Logo"
             />

@@ -12,7 +12,9 @@ const RoundProgress = ({
   const rawProgress = ((now - startMs) / (endMs - startMs)) * 100
   const progress = rawProgress <= 100 ? rawProgress : 100
 
-  return <div></div>
+  return <div>
+    {rawProgress}
+  </div>
 }
 
 export default RoundProgress

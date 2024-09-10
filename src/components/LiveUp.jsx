@@ -115,9 +115,9 @@ const getPriceDifference = (price , lockPrice) => {
 const [closeTimestamp, setCloseTimestamp] = useState()
 
 const [lockTimestamp, setLockTimestamp] = useState()
-// const reff1 = setTimeout(() => {
-//   refresh()
-// }, (REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 5000)
+const reff1 = setTimeout(() => {
+  refresh()
+}, (REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 5000)
 
   useEffect(() => {
     async function initialize() {
@@ -223,12 +223,7 @@ setDownVal(formattedBearMultiplier)
         <div className="bg-[#27262C] shadow-xl h-full rounded-3xl md:mx-0 w-[240px]">
           <div className="bg-tranparent text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-4xl  border-[#A881FC]">
 
-          {/* <RoundProgress
-        variant="flat"
-        scale="sm"
-        lockTimestamp={lockTimestamp ?? 0}
-        closeTimestamp={closeTimestamp ?? 0}
-      /> */}
+         
             <div className="flex items-center text-[#A881FC] text-base gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -246,6 +241,12 @@ setDownVal(formattedBearMultiplier)
             </div>
             <div className="text-sm text-[#A881FC]"># {Number(actualEpoch) -1}</div>
           </div>
+           <RoundProgress
+        variant="flat"
+        scale="sm"
+        lockTimestamp={lockTimestamp ?? 0}
+        closeTimestamp={closeTimestamp ?? 0}
+      />
           <div className="p-4">
             <div className="font-bold text-center p-1 bg-[#31D0AA] w-[140px] rounded-t-xl mx-auto">
               <p className="text-base font-extrabold">UP</p>
