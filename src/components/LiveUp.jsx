@@ -119,44 +119,44 @@ const reff1 = setTimeout(() => {
   refresh()
 }, (REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 5000)
 
-  useEffect(() => {
-    async function initialize() {
-      try {
-        const { provider, signer, address, contract } =
-          await initializeContract();
-        setProvider(provider);
-        setSigner(signer);
-        setAddress(address);
-        setContract(contract);
 
-        const epoch = await contract.currentEpoch();
-        setActualEpoch(epoch.toString()); // Convert and set for display
-        const epoch_in_string= epoch.toString();
+async function initialize() {
+  try {
+    const { provider, signer, address, contract } =
+      await initializeContract();
+    setProvider(provider);
+    setSigner(signer);
+    setAddress(address);
+    setContract(contract);
 
-        const rounds = await contract.rounds(epoch_in_string-1);
+    const epoch = await contract.currentEpoch();
+    setActualEpoch(epoch.toString()); // Convert and set for display
+    const epoch_in_string= epoch.toString();
+
+    const rounds = await contract.rounds(epoch_in_string-1);
 
 
-        const totslval= rounds["lockPrice"];
+    const totslval= rounds["lockPrice"];
 
-        const pricepool= rounds["totalAmount"];
+    const pricepool= rounds["totalAmount"];
 
-        const ba = rounds["bullAmount"];
-        const bearamoint = rounds["bearAmount"];
+    const ba = rounds["bullAmount"];
+    const bearamoint = rounds["bearAmount"];
 setLockpriceActual(totslval)
 
-        const closeTimestamp = rounds["closeTimestamp"];
-        const lockTimestamp = rounds["lockTimestamp"];
+    const closeTimestamp = rounds["closeTimestamp"];
+    const lockTimestamp = rounds["lockTimestamp"];
 
-        setCloseTimestamp(closeTimestamp)
+    setCloseTimestamp(closeTimestamp)
 setLockTimestamp(lockTimestamp)
 
-        const r = formatPrice3(pricepool.toString())
+    const r = formatPrice3(pricepool.toString())
 seTpricepool(r);
 
-        const  val = formatPrice(totslval.toString())
+    const  val = formatPrice(totslval.toString())
 
 
-        setLockPrice(val)
+    setLockPrice(val)
 
 
 
@@ -177,10 +177,13 @@ setDownVal(formattedBearMultiplier)
 
 
 
-      } catch (error) {
-        console.error("Error initializing contract:", error);
-      }
-    }
+  } catch (error) {
+    console.error("Error initializing contract:", error);
+  }
+}
+
+  useEffect(() => {
+
     initialize();
   },[]);
   const getNowInSeconds = () => Math.floor(Date.now() / 1000)
@@ -217,6 +220,24 @@ setDownVal(formattedBearMultiplier)
   }, [refresh, closeTimestamp])
 
 
+
+  const startMs = lockTimestamp * 1000
+  const endMs = closeTimestamp * 1000
+  const now = Date.now()
+  const rawProgress = ((now - startMs) / (endMs - startMs)) * 100
+  const progress = rawProgress <= 100 ? rawProgress : 100
+  const refValTimeour = setTimeout(() => {
+
+  if(Math.round(progress) == 100) {
+    initialize()
+  }
+
+  }, ( REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 1000)
+
+
+  const bg1 = formatPrice(priceDifference) >=0 ? "bg-[#31D0AA]" : "bg-[#353547]"
+  const bg2 = formatPrice(priceDifference) <0 ? "bg-[#353547]":   "bg-[#31D0AA]" 
+
   return (
     <div>
       <div className="flex justify-center items-center pt-10 text-white">
@@ -248,7 +269,7 @@ setDownVal(formattedBearMultiplier)
         closeTimestamp={closeTimestamp ?? 0}
       />
           <div className="p-4">
-            <div className="font-bold text-center p-1 bg-[#31D0AA] w-[140px] rounded-t-xl mx-auto">
+            <div className={`font-bold text-center p-1 bg-[#31D0AA] w-[140px] rounded-t-xl mx-auto`}>
               <p className="text-base font-extrabold">UP</p>
               <p className="text-sm">
                 {upval}x <span className=" font-medium"> payout</span>
@@ -260,7 +281,7 @@ setDownVal(formattedBearMultiplier)
               </div>
 
               <div className="flex justify-between items-center">
-                <p className=" font-bold text-[#31D0AA] text-base">${formatPrice(price)}</p>
+                <p className=" font-bold text-[#31D0AA] text-base px-1">${formatPrice(price)}</p>
 
                 {/* <p className=" font-bold text-[#31D0AA] text-base">${formatPrice(realprice)}</p> */}
              {
@@ -309,7 +330,7 @@ setDownVal(formattedBearMultiplier)
                 </div>
               </div>
             </div>
-            <div className="font-bold text-center p-1 bg-[#353547] w-[140px] rounded-b-xl mx-auto">
+            <div className={`font-bold text-center p-1 bg-[#353547] w-[140px] rounded-b-xl mx-auto`}>
               <p className="text-[#B0A5C9] text-sm">
            {downVal}x <span className=" font-medium"> payout</span>
               </p>
