@@ -20,25 +20,30 @@ function serializeBigInt(data) {
   return data;
 }
 
-const BSC_MAINNET_RPC_URL = import.meta.env.VITE_RPC_URL;
+// const BSC_MAINNET_RPC_URL = import.meta.env.VITE_RPC_URL;
 
 export async function initializeContract() {
   try {
     // Initialize provider using BSC Mainnet RPC
 
-    const provider = new ethers.providers.JsonRpcProvider(BSC_MAINNET_RPC_URL);
+    // const provider = new ethers.providers.JsonRpcProvider(BSC_MAINNET_RPC_URL);
 
-    // Replace with your actual private key
-    const privateKey = "2fe19645fa8f2036d77bd9a459478fcd92655899df2cb3d876b9d02aaf6c9ef3";
+    // // Replace with your actual private key
+    // const privateKey = "2fe19645fa8f2036d77bd9a459478fcd92655899df2cb3d876b9d02aaf6c9ef3";
 
-    // Create signer from private key
-    const signer = new ethers.Wallet(privateKey, provider);
+    // // Create signer from private key
+    // const signer = new ethers.Wallet(privateKey, provider);
 
-    // Get the address from the signer
-    const address = await signer.getAddress();
+    // // Get the address from the signer
+    // const address = await signer.getAddress();
 
-    // Fetch the chain ID for BSC Mainnet (it should return 56 for BSC Mainnet)
-    const chainId = await provider.getNetwork().then((network) => network.chainId);
+    // // Fetch the chain ID for BSC Mainnet (it should return 56 for BSC Mainnet)
+    // const chainId = await provider.getNetwork().then((network) => network.chainId);
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+  const signer = provider.getSigner(); // Get the signer from the provider
+
 
     // Contract address for PancakeSwap
     const ContractAddress = "0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA";
@@ -46,7 +51,7 @@ export async function initializeContract() {
     // Assuming you have the ABI for the contract
     const contract = new ethers.Contract(ContractAddress, Abi, signer);
 
-    return { provider, signer, address, contract, chainId };
+    return { provider, signer, contract };
   } catch (error) {
     console.error("Error initializing contract:", error);
     throw error;

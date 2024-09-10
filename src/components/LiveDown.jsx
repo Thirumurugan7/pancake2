@@ -64,7 +64,7 @@ const LiveUp = ({ handleFlip }) => {
             <div className="text-sm text-[#A881FC]"># {actualEpoch}</div>
           </div>
           <div className="p-4">
-            <div className="font-bold text-center p-1 bg-[#31D0AA] w-[140px] rounded-t-xl mx-auto">
+            <div className="font-bold text-center p-1 bg-[#000000] w-[140px] rounded-t-xl mx-auto">
               <p className="text-base font-extrabold">UP</p>
               <p className="text-sm">
                 2.66x <span className=" font-medium"> payout</span>

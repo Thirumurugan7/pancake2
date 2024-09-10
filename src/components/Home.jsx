@@ -45,11 +45,10 @@ const formatPrice = (price) => {
 
 async function initialize() {
   try {
-    const { provider, signer, address, contract } =
+    const { provider, signer, contract } =
       await initializeContract();
     setProvider(provider);
     setSigner(signer);
-    setAddress(address);
     setContract(contract);
 
     const epoch = await contract.currentEpoch();
@@ -89,7 +88,7 @@ setDownVal(formattedBearMultiplier)
 
 const reff1 = setTimeout(() => {
   initialize()
-}, 10* 1000)
+},  1000)
 
 
 

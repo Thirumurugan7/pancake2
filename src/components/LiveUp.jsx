@@ -122,11 +122,10 @@ const reff1 = setTimeout(() => {
 
 async function initialize() {
   try {
-    const { provider, signer, address, contract } =
+    const { provider, signer, contract } =
       await initializeContract();
     setProvider(provider);
     setSigner(signer);
-    setAddress(address);
     setContract(contract);
 
     const epoch = await contract.currentEpoch();
@@ -219,7 +218,10 @@ setDownVal(formattedBearMultiplier)
     return undefined
   }, [refresh, closeTimestamp])
 
-
+  const reff2 = setTimeout(() => {
+    initialize()
+  }, 10* 1000)
+  
 
   const startMs = lockTimestamp * 1000
   const endMs = closeTimestamp * 1000
