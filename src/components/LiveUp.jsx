@@ -237,8 +237,8 @@ setDownVal(formattedBearMultiplier)
   }, ( REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 1000)
 
 
-  const bg1 = formatPrice(priceDifference) >=0 ? "bg-[#31D0AA]" : "bg-[#353547]"
-  const bg2 = formatPrice(priceDifference) <0 ? "bg-[#353547]":   "bg-[#31D0AA]" 
+  const bg1 = formatPrice(priceDifference) >=0 ? "bg-[#31D0AA] text-[#353547]" : "bg-[#353547] text-white "
+  const bg2 = formatPrice(priceDifference) >0 ? "bg-[#353547] text-white":   "bg-[#31D0AA] text-white " 
 
   return (
     <div>
@@ -271,7 +271,7 @@ setDownVal(formattedBearMultiplier)
         closeTimestamp={closeTimestamp ?? 0}
       />
           <div className="p-4">
-            <div className={`font-bold text-center p-1 bg-[#31D0AA] w-[140px] rounded-t-xl mx-auto`}>
+            <div className={`font-bold text-center p-1 ${bg1} w-[140px] rounded-t-xl mx-auto`}>
               <p className="text-base font-extrabold">UP</p>
               <p className="text-sm">
                 {upval}x <span className=" font-medium"> payout</span>
@@ -332,11 +332,11 @@ setDownVal(formattedBearMultiplier)
                 </div>
               </div>
             </div>
-            <div className={`font-bold text-center p-1 bg-[#353547] w-[140px] rounded-b-xl mx-auto`}>
-              <p className="text-[#B0A5C9] text-sm">
+            <div className={`font-bold text-center p-1 ${bg2} w-[140px] rounded-b-xl mx-auto`}>
+              <p className=" text-sm">
            {downVal}x <span className=" font-medium"> payout</span>
               </p>
-              <p className="text-[#ED4B9E] text-base">DOWN</p>
+              <p className=" text-base">DOWN</p>
             </div>
           </div>
         </div>

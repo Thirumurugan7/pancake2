@@ -125,7 +125,7 @@ const reff1 = setTimeout(() => {
           <div className="p-4">
             <div className=" text-base font-bold text-center p-1 bg-[#353547] w-[140px] rounded-t-xl mx-auto">
               <p className="text-[#31D0AA] text-base font-extrabold">UP</p>
-              <p className="text-[#B0A5C9] text-xs">{upval !== NaN ? upval : "" }x <span className=" font-medium"> payout</span></p>
+              <p className="text-[#B0A5C9] text-xs">{!Number.isNaN(upval) ? upval : "" }x <span className=" font-medium"> payout</span></p>
             </div>
             <div className="w-full mx-auto border-2 border-[#A881FC] p-4 rounded-xl">
               <div className="flex justify-between font-bold text-sm">
