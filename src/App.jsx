@@ -66,7 +66,10 @@ const App = () => {
   return (
     <WagmiProvider config={config}>
   <QueryClientProvider client={queryClient} >
-    <div className="flex-col justify-center items-center min-h-screen bg-[#4D4A7B] inter-font">
+    <div className=" from-[#A881FC] to-[#5F39AA] bg-center bg-cover min-h-screen inter-font" style={{        backgroundImage: ' radial-gradient(var(--tw-gradient-stops))',}}>
+
+
+    <div className="flex-col justify-center items-center min-h-screen  inter-font">
       <div className="flex flex-col items-center mx-auto min-h-screen text-white pt-6">
         <div className="flex justify-center">
           <div className=" space-y-3">
@@ -117,10 +120,9 @@ const App = () => {
           </div>
         </div>
       </div>
-      <LiveDown />
-    </div>
 
-    <Comp />
+    </div>
+    </div>
     </QueryClientProvider>
     </WagmiProvider>
   );
