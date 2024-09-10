@@ -182,7 +182,7 @@ setDownVal(formattedBearMultiplier)
       }
     }
     initialize();
-  });
+  },[]);
   const getNowInSeconds = () => Math.floor(Date.now() / 1000)
 
   const isHouse = useMemo(() => {

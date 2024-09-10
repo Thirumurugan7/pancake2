@@ -88,7 +88,7 @@ setDownVal(formattedBearMultiplier)
 }
 
 const reff1 = setTimeout(() => {
-  initialize()
+  // initialize()
 }, (REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 1000)
 
 
