@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HeaderLogo from "./assets/pancakelogo.png";
+import HeaderLogo from "./assets/headerlogo.png";
 import Home from "./components/Home";
 import BetBull from "./components/BetBull";
 import BetBeer from "./components/BetBear";
@@ -79,7 +79,7 @@ const App = () => {
         <div className="flex justify-center">
           <div className=" space-y-3">
             <img
-              className="h-14 w-50 mx-auto rounded-full"
+              className="h-7 w-auto mx-auto rounded-full"
               src={HeaderLogo}
               alt="Header Logo"
             />
@@ -128,7 +128,7 @@ const App = () => {
 
               
             </motion.div>
-            <div className="mt-5 flex flex-col justify-center items-center gap-2  absolute right-[160px] w-max">Powered by Winks.fun <img src={wink} className="w-10 h-10"  alt="wink" /></div>
+            <div className="mt-6 flex flex-col justify-center items-center gap-2  absolute right-[160px] w-max">Powered by Winks.fun</div>
 
           </div>
           
