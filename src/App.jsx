@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Wallet from "./components/Wallet";
 import LiveUp from "./components/LiveUp";
 import LiveDown from "./components/LiveDown";
+import wink from "./assets/Winks.png"
 // import usePollOraclePrice from "./hooks/usePollOraclePrice";
 import { EvmPriceServiceConnection } from '@pythnetwork/pyth-evm-js'
 import { useQuery } from '@tanstack/react-query'
@@ -103,6 +104,8 @@ const App = () => {
                 }}
               >
                 <Home handleFlip={handleFlip} />
+
+
               </div>
 
               {/* Back Side */}
@@ -119,9 +122,16 @@ const App = () => {
                 {backComponent === "BetBear" && (
                   <BetBeer handleFlip={handleFlip} />
                 )}
+
+
               </div>
+
+              
             </motion.div>
+            <div className="mt-5 flex flex-col justify-center items-center gap-2  absolute right-[160px] w-max">Powered by Winks.fun <img src={wink} className="w-10 h-10"  alt="wink" /></div>
+
           </div>
+          
         </div>
       </div>
 
