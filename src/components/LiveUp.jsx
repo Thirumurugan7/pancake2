@@ -134,10 +134,10 @@ async function initialize() {
     setContract(contract);
 
     const epoch = await contract.currentEpoch();
-    setActualEpoch(epoch.toString()); // Convert and set for display
+    setActualEpoch(Number(epoch.toString())); // Convert and set for display
     const epoch_in_string= epoch.toString();
 
-    const rounds = await contract.rounds(epoch_in_string-1);
+    const rounds = await contract.rounds(Number(epoch_in_string)-1);
 
 
     const totslval= rounds["lockPrice"];
@@ -145,7 +145,9 @@ async function initialize() {
     const pricepool= rounds["totalAmount"];
 
     const ba = rounds["bullAmount"];
+
     const bearamoint = rounds["bearAmount"];
+
 setLockpriceActual(totslval)
 
     const closeTimestamp = rounds["closeTimestamp"];
