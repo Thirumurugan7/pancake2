@@ -75,22 +75,24 @@ const App = () => {
 
 
     <div className="flex-col justify-center items-center min-h-screen  inter-font">
-      <div className="flex flex-col items-center mx-auto min-h-screen text-white pt-6">
+      <div className="flex flex-col items-center mx-auto min-h-screen text-white pt-60 md:pt-24">
         <div className="flex justify-center">
           <div className=" space-y-3">
             <img
-              className="h-7 w-auto mx-auto rounded-full"
+              className="h-7 w-auto md:mx-auto rounded-full"
               src={HeaderLogo}
               alt="Header Logo"
             />
             <Wallet />
           </div>
         </div>
-        <div className="flex gap-3">
+        <div className="flex ">
+        <div className="">
           <LiveUp />
-          <div className="relative w-[240px] perspective">
+          </div>
+          <div className="relative w-[200px] md:w-[240px] perspective">
             <motion.div
-              className="relative w-full h-full"
+              className="relative w-[200px] md:w-full h-[20px] md:h-full"
               style={{ transformStyle: "preserve-3d" }}
               initial={{ rotateY: 0 }}
               animate={{ rotateY: isFlipped ? 180 : 0 }}
@@ -98,7 +100,7 @@ const App = () => {
             >
               {/* Front Side */}
               <div
-                className="absolute w-full h-full"
+                className="absolute w-[200px] md:w-full h-[20px] md:h-full"
                 style={{
                   backfaceVisibility: "hidden",
                 }}
@@ -128,7 +130,7 @@ const App = () => {
 
               
             </motion.div>
-            <div className="mt-6 flex flex-col justify-center items-center gap-2  absolute right-[160px] w-max">Powered by Winks.fun</div>
+            <div className="mt-[350px] md:mt-12 flex flex-col justify-center items-center gap-2  absolute right-[120px] md:right-[150px] w-max">Powered by Winks.fun</div>
 
           </div>
           
